@@ -1,0 +1,84 @@
+#form-content{
+    width: 450px;
+    height: 370px;
+    margin: 60px auto;
+    box-shadow: 2px 2px 12px rgb(124, 124, 124);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+}
+form input{
+    width: 250px;
+    height: 30px;
+    margin-bottom: 12px;
+    padding: 0px 10px;
+    border-style: none none solid none;
+    background-color: rgb(243, 243, 243);
+    border-color: rgb(173, 0, 0);
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+input:focus{
+    outline: none;
+    color: blue;
+    border-color: blue;
+}
+.f-pass{
+    color: blue;
+    font-size: 14px;
+    width: 100px;
+}
+#f-pass{
+    align-self: flex-start;
+}
+#log-btn{
+    width: 150px;
+    background-color: rgb(86, 86, 250);
+    color: white;
+    border: none;
+    font-size: 16px;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+#log-btn:hover{
+    background-color: rgb(250, 67, 67);
+}
+
+.form-div{
+    width: 400px;
+    display: flex;
+}
+
+form label{
+    align-self: flex-start;
+}
+
+.div-align{
+    display: flex;
+    flex-direction: column;
+}
+
+.add-btn{
+    color: white;
+    width: 120px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: 0.3s;
+    background-color: rgb(77, 77, 209);
+}
+.add-btn:hover{
+    background-color: rgb(245, 65, 65);
+}

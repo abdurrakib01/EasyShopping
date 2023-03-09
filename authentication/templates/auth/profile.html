@@ -1,0 +1,27 @@
+{% extends 'comp/base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock title %}
+{% block style %}
+    <style>
+        a.pr{
+            color:red;
+        }
+    </style>
+{% endblock style %}
+{%block main-content %}
+<div id="form-content">
+    <h1>Hello {{request.user}}</h1>
+    <div class="address">
+        {% for usr in user %}
+        <div class="address-info">
+            <div>
+            <h4>Address {{forloop.counter}}</h4>
+            <h4>{{usr.name}}</h4>
+            <p>{{usr.locality}}, {{usr.city}}, {{usr.zipcode}}, {{usr.state}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    <a href="{% url 'address' %}" class="add-btn">Add Address</a>
+</div>
+{% endblock main-content %}

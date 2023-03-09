@@ -1,0 +1,38 @@
+{% extends 'comp/base.html' %}
+{% load static %}
+{% block title %} Product-Detail {% endblock title %}
+{% block main-content %}
+<div class="product-detail">
+    <img src="{{ product.product_image.url}}"/>
+    <div class="detail">
+        <h3>Product Title: {{product.title}}</h3>
+        <hr/>
+        <p>Product Description: {{product.description}}</p>
+        <p class="tk">ট: {{product.selling_price}}</p>
+        <p class="dis"><del>ট: {{product.discount_price}}</del></p><br/>
+        <p class="quantity">Quantity: 
+            <span class="add min cart-dminus">
+            <i class="material-icons">remove</i></span>
+            <span id="quan">1</span>
+            <span class="add cart-dplus">
+            <i class="material-icons">add</i></span>
+        </p>
+        <div class="cartbuy">
+            
+            {% if product_exit %}
+            <a href="{% url 'components:carts' %}" id="gobtn" class="cart">Go To Cart</a>
+            {% else %}
+            <form action="/add-to-cart/">
+                <input type="hidden" name="prod_id" value="{{product.id}}"/>
+                <input type="submit" value="Add to Cart" class="btn cart"/>
+            </form>
+            {% endif %}
+            <form action="/buy-now/">
+                <input type="hidden" name="prod_id" value="{{product.id}}"/>
+                <input type="submit" value="Buy Now" pid="{{product.id}}" class="btn buy"/>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %} 
+{% comment %} detail {% endcomment %}

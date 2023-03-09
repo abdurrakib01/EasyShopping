@@ -1,0 +1,67 @@
+{% extends 'comp/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block style %}
+    <style>
+        a.home{
+            color:red;
+        }
+    </style>
+{% endblock style %}
+{% block main-content %}
+{% load static %}
+<div class="banner">
+    <img src="{% static 'comp/image/banner.jpg' %}"/>
+</div>
+<p class="product-title">Top Wears:</p>
+<div class="content-block">
+    {% for top in topwears %}
+    <ul class="product-design">
+        <a href="{% url 'components:detail' top.id %}">
+        <img src="{{ top.product_image.url}}"/>
+        <li class="title-code">{{top.title}}</li>
+        <li class="tk">ট: {{top.selling_price}}</li>
+        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+    </a>
+    </ul>
+    {% endfor %}
+</div>
+<p class="product-title">Bottom Wears:</p>
+<div class="content-block">
+    {% for top in bottomwears %}
+    <ul class="product-design">
+        <a href="{% url 'components:detail' top.id %}">
+        <img src="{{ top.product_image.url}}"/>
+        <li class="title-code">{{top.title}}</li>
+        <li class="tk">ট: {{top.selling_price}}</li>
+        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+    </a>
+    </ul>
+    {% endfor %}
+</div>
+<p class="product-title">Mobile:</p>
+<div class="content-block">
+    {% for top in mobile %}
+    <ul class="product-design">
+        <a href="{% url 'components:detail' top.id %}">
+        <img src="{{ top.product_image.url}}"/>
+        <li class="title-code">{{top.title}}</li>
+        <li class="tk">ট: {{top.selling_price}}</li>
+        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+    </a>
+    </ul>
+    {% endfor %}
+</div>
+<p class="product-title">Laptop:</p>
+<div class="content-block">
+    {% for top in laptop %}
+    <ul class="product-design">
+        <a href="{% url 'components:detail' top.id %}">
+        <img src='{{top.product_image.url}}'/>
+        <li class="title-code">{{top.title}}</li>
+        <li class="tk">ট: {{top.selling_price}}</li>
+        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+        </a>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock main-content %}

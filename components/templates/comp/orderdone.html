@@ -1,0 +1,36 @@
+{% extends 'comp/base.html' %}
+{% block title %}cart{% endblock title %}
+{% block style %}
+    <style>
+        a.or{
+            color:red;
+        }
+    </style>
+{% endblock style %}
+{% block main-content %}
+{% load static %}
+<div class="block">
+    <div class="cart-block">
+        <h3>{{message}}</h3>
+        {% for cart in carts %}
+        <div class="cart-content order-content">
+            <div class="des">
+            <a href="{% url 'components:detail' cart.product.id %}">
+            <img src="{{ cart.product.product_image.url}}"/>
+            <div class="prod-title">
+                <h3>{{cart.product.title}}</h3>
+                <p class="prod-des">Product Description: {{cart.product.description}}</p>
+            </div>
+            </a>
+            </div>
+            <div class="price">
+            <p class="tk">ট: {{cart.product.selling_price}}</p>
+            <p class="dis"><del>ট: {{cart.product.discount_price}}</del></p>
+            <p class="quantity">Quantity: {{cart.quantity}}</p>
+            <h4 style="margin-top:15px">Order Status: {{cart.status}}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

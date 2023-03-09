@@ -1,0 +1,37 @@
+{% extends 'comp/base.html' %}
+{% load static %}
+{% block title %} Login {% endblock title %}
+{% block style %}
+    <style>
+        a.lo{
+            color:red;
+        }
+    </style>
+{% endblock style %}
+{%block main-content %}
+<div id="form-content">
+    <form action="" method="post">
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="div-align"> 
+                {{field.label_tag}} {{field}}
+                <small>{{ field.errors }}</small>
+                
+            </div>
+        {% endfor %}
+        <a href="{% url 'password_reset' %}" class="f-pass" id="f-pass">Forget password?</a>
+        <input type="submit" id="log-btn" value='Login'/>
+        <small>New to EasyShoping? <a href="{% url 'user-register' %}" class="f-pass">Create Account</a></small>
+        {% if form.non_field_errors %}
+            {% for err in form.non_field_errors %} 
+                <p>{{err}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock main-content %}

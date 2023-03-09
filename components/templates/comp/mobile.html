@@ -1,0 +1,33 @@
+{% extends 'comp/base.html'%}
+{% load static %}
+{% block title %}Mobile{% endblock title %}
+{% block style %}
+        <style>
+            a.tec{
+                color:red;
+            }
+        </style>
+    {% endblock style %}
+{% block main-content%}
+<div class="mobile-container">
+    <div class="category-search">
+        <h3>Brand</h3>
+        <hr/>
+        <a href="{% url 'components:mobile' %}" class="category">All Mobile</a>
+        <a href="{% url 'components:mobile-data' 'Apple' %}" class="category">Apple</a>
+        <a href="{% url 'components:mobile-data' 'Samsung'%}" class="category">Samsung</a>
+    </div>
+    <div class="mobile-block">
+        {% for top in mobile %}
+        <ul class="product-design">
+            <a href="{% url 'components:detail' top.id %}">
+            <img src="{{ top.product_image.url}}"/>
+            <li>{{top.title}}</li>
+            <li class="tk">ট: {{top.selling_price}}</li>
+            <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+        </a>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main-content%}

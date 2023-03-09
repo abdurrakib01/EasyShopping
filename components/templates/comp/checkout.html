@@ -1,0 +1,54 @@
+{% extends 'comp/base.html' %}
+{% block title %}cart{% endblock title %}
+{% block main-content %}
+{% load static %}
+<div class="block">
+    <div class="cart-block">
+        <h3>{{message}}</h3>
+        {% for cart in carts %}
+        <div class="cart-content">
+            <div class="des">
+            <a href="{% url 'components:detail' cart.product.id %}">
+            <img src="{{ cart.product.product_image.url}}"/>
+            <div class="prod-title">
+                <h3>{{cart.product.title}}</h3>
+                <p class="prod-des">Product Description: {{cart.product.description}}</p>
+            </div>
+            </a>
+            </div>
+            <div class="price">
+            <p class="tk">ট: {{cart.product.selling_price}}</p>
+            <p class="dis"><del>ট: {{cart.product.discount_price}}</del></p>
+            <p class="quantity">Quantity: {{cart.quantity}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="placeorder-block">
+        <h3>Customer Address</h3>
+        <form action="{% url 'components:order_done' %}">
+        {% csrf_token %}
+        <div class="address">
+        {% for customer in customers %}
+        <div class="address-info">
+            <input class="radio" id="customer{{forloop.counter}}" 
+                type="radio" name="customer" value="{{customer.id}}"/>
+            <label for="radio">
+            <h4>{{customer.name}}</h4>
+            <p>{{customer.locality}}, {{customer.city}}, {{customer.zipcode}}, {{customer.state}}</p>
+            </label>
+        </div>
+        {% endfor %}
+        </div>
+        <div class="addressorder-block">
+        <h3>Total Product Price</h3>
+        <p>Ammount: <span id="amount">{{amount}}</span></p>
+        <p class="cost">Shipping Cost:<span> {{shipping_cost}}</span></p>
+        <hr/>
+        <p>Total Ammount: <span id="total_amount">{{total_amount}}</span></p>
+        <input type="submit" class="rbtn pro" value="Place Order"/>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

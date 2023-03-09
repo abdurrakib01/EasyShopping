@@ -1,0 +1,52 @@
+{% extends 'comp/base.html' %}
+{% block title %}cart{% endblock title %}
+{% block main-content %}
+{% load static %}
+<div class="block">
+    <div class="cart-block">
+        <div class="checkout-content">
+            <div class="des">
+            <a>
+            <img src="{{ product.product_image.url}}"/>
+            <div class="prod-title">
+                <h3>{{product.title}}</h3>
+                <p>Product Description: {{product.description}}</p>
+            </div>
+            </a>
+            </div>
+            <div class="price">
+            <p class="tk">ট: {{product.selling_price}}</p>
+            <p class="dis"><del>ট: {{product.discount_price}}</del></p>
+            <p class="quantity">Quantity: 1 </p>
+            </div>
+        </div>
+    </div>
+    <div class="placeorder-block">
+        <h3>Customer Address</h3>
+        <form action="{% url 'components:orderplaced' %}">
+            {% csrf_token %}
+        <input type="hidden" name="prod_id" value="{{product.id}}"/>
+        <div class="address">
+        {% for customer in customers %}
+        <div class="address-info"> 
+            <input class="radio" id="customer{{forloop.counter}}" 
+                type="radio" name="customer" value="{{customer.id}}"/>
+            <label for="radio">
+            <h4>{{customer.name}}</h4>
+            <p>{{customer.locality}}, {{customer.city}}, {{customer.zipcode}}, {{customer.state}}</p>
+            </label> 
+        </div>
+        {% endfor %}
+        </div>
+        <div class="addressorder-block">
+        <h3>Total Product Price</h3>
+        <p>Ammount: <span id="amount">{{amount}}</span></p>
+        <p class="cost">Shipping Cost:<span> {{shipping_cost}}</span></p>
+        <hr/>
+        <p>Total Ammount: <span id="total_amount">{{total_amount}}</span></p>
+        <input type="submit" class="rbtn pro" value="Place Order"/>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

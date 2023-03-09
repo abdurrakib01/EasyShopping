@@ -1,0 +1,35 @@
+{% extends 'comp/base.html' %}
+{% load static %}
+{% block title %} Registration {% endblock title %}
+{% block style %}
+    <style>
+        a.re{
+            color:red;
+        }
+    </style>
+{% endblock style %}
+{%block main-content %}
+<div id="form-content">
+    <form action="" method="post"> 
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="div-align"> 
+                {{field.label_tag}} {{field}}
+                <small>{{ field.errors }}</small> 
+            </div>
+        {% endfor %}
+        <input type="submit" id="log-btn" value='Register'/>
+        <small>Already have account? <a href="{% url 'user-login' %}" class="f-pass">Login</a></small>
+        {% if form.non_field_errors %}
+            {% for err in form.non_field_errors %}
+                <p>{{err}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock main-content %}
