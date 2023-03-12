@@ -665,11 +665,12 @@ footer{
 }
 
 
-.banner img{
+#owl-img{
     height: 350px;
+    transition: 2s;
 }
 
-.slider{
+/* .slider{
     width: 100%;
     height: 350px;
     border-radius: 10px;
@@ -761,4 +762,4 @@ footer{
 }
 #radio4:checked ~ .navigation-auto .auto-btn4{
     background-color: white;
-}
+} */

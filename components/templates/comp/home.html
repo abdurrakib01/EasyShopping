@@ -9,13 +9,16 @@
 {% endblock style %}
 {% block main-content %}
 {% load static %}
-{% comment %} <div class="banner">
-    <img src="{% static 'comp/image/banner.jpg' %}"/>
-</div> {% endcomment %}
+<div class="owl-carousel owl-theme">
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban2.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban1.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner1.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban3.jpg' %}"/></div>
+</div>
 
-
-
-<div class="slider">
+<!-- <div class="slider">
     <div class="slides">
         <input type="radio" name="radio-btn" id="radio1"/>
         <input type="radio" name="radio-btn" id="radio2"/>
@@ -48,11 +51,7 @@
         <label for="radio3" class="manual-btn"></label>
         <label for="radio4" class="manual-btn"></label>
     </div>
-</div>
-
-
-
-
+</div> -->
 
 <p class="product-title">Top Wears:</p>
 <div class="content-block">
