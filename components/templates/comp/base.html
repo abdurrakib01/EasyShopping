@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyShoping | {% block title %} {% endblock title%}</title>
+    <title>EasyShopping | {% block title %} {% endblock title%}</title>
     <link rel="stylesheet" href="{% static 'comp/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'auth/css/login.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,14 +26,14 @@
                 <a onclick="tecDropDown()" class="dropdownclick tec">Technologies<i class="material-icons">arrow_drop_down</i></a>
                 <div class="tec-dropdown">
                     <a href="{% url 'components:mobile' %}" id="tec-dropdown-menu">Mobile</a>
-                    <a href="#" id="tec-dropdown-menu">Laptop</a>
+                    <a href="{% url 'components:laptop' %}" id="tec-dropdown-menu">Laptop</a>
                 </div>
             </div>
             <div id="toggle">
             <a onclick="fashionDropDown()" class="dropdownclick fash">Fashion <i class="material-icons">arrow_drop_down</i></a>
             <div class="dropdown">
-                <a href="#" id="dropdown-menu">Top Wears</a>
-                <a href="#" id="dropdown-menu">Bottom Wears</a>
+                <a href="{% url 'components:topwear' %}" id="dropdown-menu">Top Wears</a>
+                <a href="{% url 'components:bottomwear' %}" id="dropdown-menu">Bottom Wears</a>
             </div>
             </div>
             </div>
@@ -61,7 +61,7 @@
     </div>
     </nav>
     <div class="search-box">
-        <input type="text" class="search" placeholder="Search in EasyShoping"/>
+        <input type="text" class="search" placeholder="Search in EasyShopping"/>
         <input type="submit" value="Search" class="search-btn"/>
     </div>
     {% block main-content %}
@@ -71,7 +71,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
-        $('.owl-carousel').owlCarousel({
+        $('.owl-one').owlCarousel({
             loop:true,
             margin:10,
             nav:false,
@@ -88,6 +88,33 @@
                 1000:{
                     items:1
                 }
+            }
+        })
+        $('.owl-two').owlCarousel({
+            loop:false,
+            margin:10,
+            nav:false,
+            stagePadding:40,
+            dots:false,
+            responsive:{
+                0:{
+                    items:2
+                },
+                600:{
+                    items:3
+                },
+                800:{
+                    items:3
+                },
+                900:{
+                    items:4
+                },
+                1000:{
+                    items:5
+                },
+                1200:{
+                    items:6
+                },
             }
         })
     </script>

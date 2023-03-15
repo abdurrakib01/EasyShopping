@@ -9,12 +9,12 @@
 {% endblock style %}
 {% block main-content %}
 {% load static %}
-<div class="owl-carousel owl-theme">
+<div class="owl-carousel owl-one owl-theme">
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner1.jpg' %}"/></div>
     <div class="item"><img id="owl-img" src="{% static 'comp/image/banner.jpg' %}"/></div>
     <div class="item"><img id="owl-img" src="{% static 'comp/image/ban2.jpg' %}"/></div>
     <div class="item"><img id="owl-img" src="{% static 'comp/image/ban1.jpg' %}"/></div>
     <div class="item"><img id="owl-img" src="{% static 'comp/image/ban.jpg' %}"/></div>
-    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner1.jpg' %}"/></div>
     <div class="item"><img id="owl-img" src="{% static 'comp/image/ban3.jpg' %}"/></div>
 </div>
 
@@ -55,54 +55,70 @@
 
 <p class="product-title">Top Wears:</p>
 <div class="content-block">
+    <div class="owl-carousel owl-two owl-theme">
     {% for top in topwears %}
-    <ul class="product-design">
-        <a href="{% url 'components:detail' top.id %}">
-        <img src="{{ top.product_image.url}}"/>
-        <li class="title-code">{{top.title}}</li>
-        <li class="tk">ট: {{top.selling_price}}</li>
-        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
-    </a>
-    </ul>
+    <div class="item">
+        <ul class="product-design" id="p-design">
+            <a href="{% url 'components:detail' top.id %}">
+            <img src="{{ top.product_image.url}}"/>
+            <li class="title-code">{{top.title}}</li>
+            <li class="tk">ট: {{top.selling_price}}</li>
+            <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+            </a>
+        </ul>
+    </div>
     {% endfor %}
+    </div>
 </div>
 <p class="product-title">Bottom Wears:</p>
 <div class="content-block">
-    {% for top in bottomwears %}
-    <ul class="product-design">
-        <a href="{% url 'components:detail' top.id %}">
-        <img src="{{ top.product_image.url}}"/>
-        <li class="title-code">{{top.title}}</li>
-        <li class="tk">ট: {{top.selling_price}}</li>
-        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
-    </a>
-    </ul>
-    {% endfor %}
+    <div class="owl-carousel owl-two owl-theme">
+        {% for top in bottomwears %}
+        <div class="item">
+            <ul class="product-design" id="p-design">
+                <a href="{% url 'components:detail' top.id %}">
+                <img src="{{ top.product_image.url}}"/>
+                <li class="title-code">{{top.title}}</li>
+                <li class="tk">ট: {{top.selling_price}}</li>
+                <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+                </a>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 <p class="product-title">Mobile:</p>
 <div class="content-block">
-    {% for top in mobile %}
-    <ul class="product-design">
-        <a href="{% url 'components:detail' top.id %}">
-        <img src="{{ top.product_image.url}}"/>
-        <li class="title-code">{{top.title}}</li>
-        <li class="tk">ট: {{top.selling_price}}</li>
-        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
-    </a>
-    </ul>
-    {% endfor %}
+    <div class="owl-carousel owl-two owl-theme">
+        {% for top in mobile %}
+        <div class="item" id="q-design">
+            <ul class="product-design" id="p-design">
+                <a href="{% url 'components:detail' top.id %}">
+                <img src="{{ top.product_image.url}}"/>
+                <li class="title-code">{{top.title}}</li>
+                <li class="tk">ট: {{top.selling_price}}</li>
+                <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+                </a>
+            </ul>
+        </div>
+        {% endfor %}
+        </div>
 </div>
 <p class="product-title">Laptop:</p>
 <div class="content-block">
-    {% for top in laptop %}
-    <ul class="product-design">
-        <a href="{% url 'components:detail' top.id %}">
-        <img src='{{top.product_image.url}}'/>
-        <li class="title-code">{{top.title}}</li>
-        <li class="tk">ট: {{top.selling_price}}</li>
-        <li class="dis"><del>ট: {{top.discount_price}}</del></li>
-        </a>
-    </ul>
-    {% endfor %}
+    <div class="owl-carousel owl-two owl-theme">
+        {% for top in laptop %}
+        <div class="item" id="q-design">
+            <ul class="product-design" id="p-design">
+                <a href="{% url 'components:detail' top.id %}">
+                <img src="{{ top.product_image.url}}"/>
+                <li class="title-code">{{top.title}}</li>
+                <li class="tk">ট: {{top.selling_price}}</li>
+                <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+                </a>
+            </ul>
+        </div>
+        {% endfor %}
+        </div>
 </div>
 {% endblock main-content %}
