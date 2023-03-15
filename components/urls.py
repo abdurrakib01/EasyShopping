@@ -27,7 +27,7 @@ urlpatterns = [
     path('carts/', ShowCartsView.as_view(), name='carts'),
     path('pluscart/', plus_cart),
     path('minuscart/', minus_cart),
-    path('buy-now/', buy_now, name="buy_now"),
+    path('buy-now/<int:pk>/', buy_now, name="buy_now"),
     path('delete-cart/', delete_cart, name='delete_cart'),
     path('checkout/', checkout_view, name='checkout'),
     path('orderdone/', order_done, name="order_done"),
@@ -39,4 +39,7 @@ urlpatterns = [
     path('topwear/<slug:data>', views.top_wear, name="topwear_data"),
     path('bottomwear/', views.bottom_wear, name="bottomwear"),
     path('bottomwear/<slug:data>', views.bottom_wear, name="bottomwear_data"),
+    path('prodplus/', views.product_plus),
+    path('prodminus/', views.product_minus),
+    path('search-product/', views.search_view, name="search")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

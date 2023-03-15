@@ -194,6 +194,15 @@ a{
     margin: 40px auto;
     padding: 20px;
 }
+.sear{
+    margin-top: 0px;
+    width: 90%;
+}
+.sear-res{
+    margin: 20px 65px;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
 .category-search{
     margin: 30px;
     display: flex;
@@ -212,6 +221,15 @@ a{
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    row-gap: 20px;
+}
+.red{
+    color: red;
+}
+.search-block{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
     row-gap: 20px;
 }
 .mobile-block .product-design{
@@ -401,14 +419,20 @@ footer{
 }
 
 
-.search-box{
+#search-box{
     width: 70%;
     margin: 30px auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: row;
 }
 
+.buynow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
 .search{
     width: 60%;
     height: 40px;
@@ -416,6 +440,7 @@ footer{
     border: none;
     padding-left: 10px;
     font-size: 15px;
+    background-color: white;
 }
 .search:focus{
     border: 1px solid red;
