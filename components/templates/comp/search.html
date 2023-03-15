@@ -1,0 +1,40 @@
+{% extends 'comp/base.html'%}
+{% load static %}
+{% block title %}{{src}}{% endblock title %}
+{% block style %}
+        <style>
+            a.home{
+                color:red;
+            }
+        </style>
+    {% endblock style %}
+{% block main-content%}
+<div class="owl-carousel owl-one owl-theme">
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner1.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/banner.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban2.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban1.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban.jpg' %}"/></div>
+    <div class="item"><img id="owl-img" src="{% static 'comp/image/ban3.jpg' %}"/></div>
+</div>
+<p class="sear-res">Search Result:</p>
+
+{% if message %}
+    <p class="sear-res red">{{message}}</p>
+{% endif %}
+    
+<div class="mobile-container sear">
+    <div class="search-block">
+        {% for top in products %}
+        <ul class="product-design">
+            <a href="{% url 'components:detail' top.id %}">
+            <img src="{{ top.product_image.url}}"/>
+            <li>{{top.title}}</li>
+            <li class="tk">ট: {{top.selling_price}}</li>
+            <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+        </a>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main-content%}

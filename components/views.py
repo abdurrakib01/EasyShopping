@@ -6,13 +6,13 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # Create your views here.
-
+quan = 1
 class ProductView(View):
     def get(self, request):
-        topwears = Product.objects.filter(category = 'TW')
-        bottomwears = Product.objects.filter(category = 'BW')
-        mobile = Product.objects.filter(category = 'M')
-        laptop = Product.objects.filter(category = 'L')
+        topwears = Product.objects.filter(category = 'Top Wear')
+        bottomwears = Product.objects.filter(category = 'Bottom Wear')
+        mobile = Product.objects.filter(category = 'Mobile')
+        laptop = Product.objects.filter(category = 'Laptop')
         context = {
             "topwears" : topwears,
             "bottomwears" : bottomwears,
@@ -23,6 +23,8 @@ class ProductView(View):
 
 class ProductDetailView(View):
     def get(self, request, pk):
+        global quan
+        quan = 1
         product = Product.objects.get(pk=pk)
         product_exit = False
         if request.user.is_authenticated:
@@ -36,9 +38,9 @@ class ProductDetailView(View):
 class MobileView(View):
     def get(self, request, data=None):
         if(data==None):
-           mobile = Product.objects.filter(category='M')
-        elif(data=='Apple' or data=='Samsung'):
-            mobile = Product.objects.filter(category='M').filter(brand=data)
+           mobile = Product.objects.filter(category='Mobile')
+        else:
+            mobile = Product.objects.filter(category='Mobile').filter(brand=data)
         context = {
             'mobile' : mobile,
         }
@@ -47,10 +49,11 @@ class MobileView(View):
 @method_decorator(login_required, name="dispatch")
 class AddToCartView(View):
     def get(self, request):
+        global quan
         user = request.user
         product_id = request.GET.get('prod_id')
         product = Product.objects.get(pk=product_id)
-        Cart(user=user, product=product).save()
+        Cart(user=user, product=product, quantity=quan).save()
         return redirect('/carts/')
 
 @method_decorator(login_required, name="dispatch")
@@ -137,22 +140,37 @@ def delete_cart(request):
     return redirect("/carts/")
 
 @login_required       
-def buy_now(request):
-    if request.method == 'GET': 
-        prod_id = request.GET.get("prod_id")
-        product = Product.objects.get(pk=prod_id)
-        amount = product.selling_price
-        shipping_cost = 80.0
-        total_amount = amount + shipping_cost
-        customers = Customer.objects.filter(user=request.user)
-        context = {
-            'product':product,
-            'amount' : amount,
-            'customers':customers,
-            'shipping_cost' : shipping_cost,
-            'total_amount' : total_amount,
-        }
-        return render(request, 'comp/buy.html', context)
+def buy_now(request, pk):
+    product = Product.objects.get(pk=pk)
+    amount = product.selling_price*quan
+    shipping_cost = 80.0
+    total_amount = amount + shipping_cost
+    customers = Customer.objects.filter(user=request.user)
+    context = {
+        'product':product,
+        'amount' : amount,
+        'customers':customers,
+        'shipping_cost' : shipping_cost,
+        'total_amount' : total_amount,
+        'quantity': quan,
+    }
+    return render(request, 'comp/buy.html', context)
+
+def product_plus(request):
+    global quan
+    quan =  int(request.GET["q"])
+    data = {
+        'quan': quan
+    }
+    return JsonResponse(data)
+
+def product_minus(request):
+    global quan
+    quan = int(request.GET["q"])
+    data = {
+        'quan': quan
+    }
+    return JsonResponse(data)
 
 @login_required
 def checkout_view(request):
@@ -208,26 +226,45 @@ def orderplaced(request):
     product = Product.objects.get(pk=prod_id)
     customer = Customer.objects.get(pk=cust_id)
     user = request.user
-    OrderPlaced(user=user, customer=customer, product=product, quantity=1).save()
+    OrderPlaced(user=user, customer=customer, product=product, quantity=quan).save()
     return redirect("components:order")
 
 def laptop_list(request, data=None):
     if(data==None):
-        laptops = Product.objects.filter(category='L')
+        laptops = Product.objects.filter(category='Laptop')
     else:
-        laptops = Product.objects.filter(category='L').filter(brand=data)
+        laptops = Product.objects.filter(category='Laptop').filter(brand=data)
     return render(request, "comp/laptop.html", {"laptops":laptops})
 
 def top_wear(request, data=None):
     if(data==None):
-        fashion = Product.objects.filter(category="TW")
+        fashion = Product.objects.filter(category="Top Wear")
     else:
-        fashion = Product.objects.filter(category="TW").filter(brand=data)
+        fashion = Product.objects.filter(category="Top Wear").filter(brand=data)
     return render(request, "comp/topwear.html", {"fashion":fashion})
 
 def bottom_wear(request, data=None):
     if(data==None):
-        fashion = Product.objects.filter(category="BW")
+        fashion = Product.objects.filter(category="Bottom Wear")
     else:
-        fashion = Product.objects.filter(category="BW").filter(brand=data)
+        fashion = Product.objects.filter(category="Bottom Wear").filter(brand=data)
     return render(request, 'comp/bottomwear.html', {"fashion":fashion})
+
+def search_view(request):
+    if request.method == "GET":
+        search = request.GET.get("search")
+        products = Product.objects.filter(
+            Q(title__icontains=search) | 
+            Q(brand__icontains=search) |
+            Q(description__icontains=search) |
+            Q(category__icontains=search))
+        message=""
+        if not products:
+            message = "your search doesn't match any products!"
+        context = {
+            'products':products,
+            'src':search,
+            'message' : message
+        }
+        return render(request, "comp/search.html", context)
+        
