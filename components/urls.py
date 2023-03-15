@@ -12,7 +12,9 @@ from .views import (
     checkout_view,
     order_done,
     order,
-    orderplaced)
+    orderplaced, 
+    laptop_list)
+from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 app_name = 'components'
@@ -31,4 +33,10 @@ urlpatterns = [
     path('orderdone/', order_done, name="order_done"),
     path('order/', order, name="order"),
     path('orderplaced/', orderplaced, name='orderplaced'),
+    path('laptops/', laptop_list, name="laptop"),
+    path('laptops/<slug:data>/', laptop_list, name="laptop_data"),
+    path('topwear/', views.top_wear, name="topwear"),
+    path('topwear/<slug:data>', views.top_wear, name="topwear_data"),
+    path('bottomwear/', views.bottom_wear, name="bottomwear"),
+    path('bottomwear/<slug:data>', views.bottom_wear, name="bottomwear_data"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

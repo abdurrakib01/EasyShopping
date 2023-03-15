@@ -1,0 +1,34 @@
+{% extends 'comp/base.html'%}
+{% load static %}
+{% block title %}Laptop{% endblock title %}
+{% block style %}
+        <style>
+            a.tec{
+                color:red;
+            }
+        </style>
+    {% endblock style %}
+{% block main-content%}
+<div class="mobile-container">
+    <div class="category-search">
+        <h3>Brand</h3>
+        <hr/>
+        <a href="{% url 'components:laptop' %}" class="category">All Laptop</a>
+        <a href="{% url 'components:laptop_data' 'HP' %}" class="category">HP</a>
+        <a href="{% url 'components:laptop_data' 'ASUS'%}" class="category">ASUS</a>
+        <a href="{% url 'components:laptop_data' 'Apple'%}" class="category">Apple</a>
+    </div>
+    <div class="mobile-block">
+        {% for top in laptops %}
+        <ul class="product-design">
+            <a href="{% url 'components:detail' top.id %}">
+            <img src="{{ top.product_image.url}}"/>
+            <li>{{top.title}}</li>
+            <li class="tk">ট: {{top.selling_price}}</li>
+            <li class="dis"><del>ট: {{top.discount_price}}</del></li>
+        </a>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main-content%}

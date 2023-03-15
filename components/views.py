@@ -210,3 +210,24 @@ def orderplaced(request):
     user = request.user
     OrderPlaced(user=user, customer=customer, product=product, quantity=1).save()
     return redirect("components:order")
+
+def laptop_list(request, data=None):
+    if(data==None):
+        laptops = Product.objects.filter(category='L')
+    else:
+        laptops = Product.objects.filter(category='L').filter(brand=data)
+    return render(request, "comp/laptop.html", {"laptops":laptops})
+
+def top_wear(request, data=None):
+    if(data==None):
+        fashion = Product.objects.filter(category="TW")
+    else:
+        fashion = Product.objects.filter(category="TW").filter(brand=data)
+    return render(request, "comp/topwear.html", {"fashion":fashion})
+
+def bottom_wear(request, data=None):
+    if(data==None):
+        fashion = Product.objects.filter(category="BW")
+    else:
+        fashion = Product.objects.filter(category="BW").filter(brand=data)
+    return render(request, 'comp/bottomwear.html', {"fashion":fashion})
