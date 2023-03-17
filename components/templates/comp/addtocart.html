@@ -11,7 +11,7 @@
 {% load static %}
 <div class="block">
     <div class="cart-block">
-        <h3>{{message}}</h3>
+        <h3 class="msg">{{message}}</h3>
         {% for cart in carts %}
         <div class="cart-content">
             <div class="des">
@@ -43,7 +43,11 @@
         <p>Shipping Cost: {{shipping_cost}}</p>
         <hr/>
         <p>Total Ammount: <span id="total_amount">{{total_amount}}</span></p>
-        <a href="{% url 'components:checkout' %}" class="rbtn pro check">Process To Checkout</a>
+        {% if message %}
+            <p class="rbtn pro check" id="inactive">Process To Checkout</p>
+        {% else %}
+            <a href="{% url 'components:checkout' %}" class="rbtn pro check">Process To Checkout</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

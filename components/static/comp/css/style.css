@@ -216,7 +216,13 @@ a{
 .category-search p{
     margin: 5px;
 }
-
+.msg{
+    color: red;
+}
+#inactive{
+    opacity: 0.6;
+    margin-top: 30px;
+}
 .mobile-block{
     display: grid;
     width: 100%;

@@ -10,7 +10,7 @@
 {% endblock style %}
 {%block main-content %}
 <div id="form-content">
-    <form action="" method="post"> 
+    <form action="" method="post" id="form"> 
         {% if messages %}
             {% for message in messages %}
                 <p>{{message}}</p>
@@ -27,9 +27,9 @@
         <small>Already have account? <a href="{% url 'user-login' %}" class="f-pass">Login</a></small>
         {% if form.non_field_errors %}
             {% for err in form.non_field_errors %}
-                <p>{{err}}</p>
+                <p id="err"><mark>{{err}}</mark></p>
             {% endfor %}
         {% endif %}
-    </form>
+    </form> 
 </div>
 {% endblock main-content %}
