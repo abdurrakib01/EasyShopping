@@ -72,7 +72,7 @@ class ShowCartsView(View):
                     amount += prod.product.selling_price*prod.quantity
                 shipping_cost += 80.0
             else:
-                message += "You have no product in your cart"
+                message += "You have no product in your cart!"
             total_amount += amount+shipping_cost
             context = {
                 'carts':carts,
@@ -212,7 +212,7 @@ def order(request):
     products = OrderPlaced.objects.filter(user = user)
     message = ""
     if not products:
-        message += "You don't order any product yet"
+        message += "You don't order any product yet!"
     context = {
         'carts' : products,
         'message' : message,
@@ -253,6 +253,8 @@ def bottom_wear(request, data=None):
 def search_view(request):
     if request.method == "GET":
         search = request.GET.get("search")
+        if search=="":
+            return redirect("components:product")
         products = Product.objects.filter(
             Q(title__icontains=search) | 
             Q(brand__icontains=search) |

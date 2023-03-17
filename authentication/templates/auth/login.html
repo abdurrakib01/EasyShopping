@@ -10,7 +10,7 @@
 {% endblock style %}
 {%block main-content %}
 <div id="form-content">
-    <form action="" method="post">
+    <form action="" method="post" id="form">
         {% if messages %}
             {% for message in messages %}
                 <p>{{message}}</p>
@@ -29,7 +29,7 @@
         <small>New to EasyShoping? <a href="{% url 'user-register' %}" class="f-pass">Create Account</a></small>
         {% if form.non_field_errors %}
             {% for err in form.non_field_errors %} 
-                <p>{{err}}</p>
+                <p id="err"><mark>{{err}}</mark></p>
             {% endfor %}
         {% endif %}
     </form>
