@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .form import UserRegisterForm, CustomerForm
 from django.views import View
 from django.contrib import messages
 from components.models import Customer
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from django.utils.decorators import method_decorator
 # Create your views here.
 
@@ -18,12 +18,11 @@ class UserRegisterView(View):
     def post(self, request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            messages.success(request, "Congratulation!! Registration Successfull")
             form.save() 
         context = {
             'form':form,
         }
-        return render(request, 'auth/register.html', context)
+        return redirect('/user/profile/')
     
 
 @method_decorator(login_required, name="dispatch")
