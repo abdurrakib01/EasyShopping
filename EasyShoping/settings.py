@@ -75,15 +75,20 @@ WSGI_APPLICATION = 'EasyShoping.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+#         'NAME' : 'Ecommerce',
+#         'USER' : 'postgres',
+#         'PASSWORD': 'rakib13656',
+#         'HOST' : '127.0.0.1',
+#         'PORT' : '5432'
+#     }
+# }
+import dj_database_url
+import os
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'Ecommerce',
-        'USER' : 'postgres',
-        'PASSWORD': 'rakib13656',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
-    }
+    "default":dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 
