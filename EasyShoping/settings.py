@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'components.apps.ComponentsConfig',
     'authentication.apps.AuthenticationConfig',
+    'EasyShopping',
 ]
 
 MIDDLEWARE = [
